@@ -7,6 +7,7 @@
   import TheNavMesh from './TheNavMesh.vue';
 
   import '../aframe/life-like-automaton';
+  import '../aframe/animation-mixer';
 
   defineProps({
     scale: Number,
@@ -37,7 +38,7 @@
         Model author: https://sketchfab.com/mvrc.art (Maxim Mavrichev)
         Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
       -->
-      <a-asset-item  id="room" src="assets/vr_gallery.glb"></a-asset-item>
+      <a-asset-item  id="room" src="assets/MapForestChampi.glb"></a-asset-item>
     </a-assets>
 
     <a-entity
@@ -46,7 +47,9 @@
       rotation="0 90 0"
       position="0 0 -5"
       scale="1 1.1 1"
+      animation-mixer
     >
+    
       <a-entity
         geometry="primitive: plane; height: 2; width: 2;"
         position="2 2 3.9"
