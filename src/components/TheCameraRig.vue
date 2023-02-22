@@ -8,7 +8,7 @@
 <template>
   <a-entity
     id="camera-rig"
-    movement-controls="camera: #head;"
+    movement-controls="camera: #head; speed: 0.6;"
     disable-in-vr="component: movement-controls;"
   >
 
@@ -18,7 +18,7 @@
        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
         disable-in-vr="component: simple-navmesh-constraint;"
         camera
-        position="0 1.65 0"
+        position="0 1.7 0"
       >
         <a-entity
           geometry="primitive: circle; radius: 0.0003;"

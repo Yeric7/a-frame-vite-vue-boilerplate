@@ -50,36 +50,9 @@
       animation-mixer
     >
     
-      <a-entity
-        geometry="primitive: plane; height: 2; width: 2;"
-        position="2 2 3.9"
-        rotation="-180 0 0"
-        life-like-automaton="genPerSec: 25;"
-      ></a-entity>
+    
 
-      <a-entity
-        geometry="primitive: plane; height: 2; width: 2;"
-        position="2 2 -3.9"
-        life-like-automaton="genPerSec: 25; maxGen: 10; birthRule: 6,7,8; survivalRule: 4,5,6,7,8;"
-      ></a-entity>
-
-      <BoxColorChanging
-        id="box-left"
-        :scale="scale"
-        :color="colorBoxLeft"
-        position="7 0.5 -3"
-        @click="colorBoxRight = randomHsl()"
-      />
-
-      <BoxColorChanging
-        id="box-right"
-        :scale="scale"
-        :color="colorBoxRight"
-        position="7 0.5 3"
-        @click="colorBoxLeft = randomHsl()"
-      />
     </a-entity>
-
     <TheNavMesh />
 
     <TheCameraRig />
