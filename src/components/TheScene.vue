@@ -39,7 +39,7 @@
         Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
       -->
       <a-asset-item  id="map1" src="assets/MapForestChampi.glb"></a-asset-item>
-      <a-asset-item  id="map2" src="assets/MapAvecAnimaux.glb"></a-asset-item>
+      <a-asset-item  id="map2" src="assets/MapAvecAnimaux.glb" ></a-asset-item>
     </a-assets>
 
     <a-entity
