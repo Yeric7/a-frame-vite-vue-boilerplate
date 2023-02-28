@@ -15,7 +15,7 @@ AFRAME.registerComponent('grabbable', {
     this.target = this.data.target;
  
     // Scale down the object
-    this.el.object3D.scale.set(0.25, 0.25, 0.25);
+    this.el.object3D.scale.set(0.1, 0.1, 0.1);
     
   },
   reset: function () {
