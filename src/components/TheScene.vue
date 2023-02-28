@@ -40,9 +40,20 @@
       -->
       <a-asset-item  id="map1" src="assets/MapForestChampi.glb"></a-asset-item>
       <a-asset-item  id="map2" src="assets/MapAvecAnimaux.glb" ></a-asset-item>
+      <a-asset-item  id="map3" src="assets/ilo.glb" ></a-asset-item>
     </a-assets>
 
     <a-entity
+      v-if="allAssetsLoaded"
+      gltf-model="#map1"
+      rotation="0 90 0"
+      position="0 -15 -5"
+      scale="1 1.1 1"
+      animation-mixer
+    >
+    
+    </a-entity>
+  <!--   <a-entity
       v-if="allAssetsLoaded"
       gltf-model="#map1"
       rotation="0 90 0"
@@ -50,8 +61,7 @@
       scale="1 1.1 1"
       animation-mixer
     >
-    
-    </a-entity>
+    </a-entity> -->
 
     <a-entity
       v-if="allAssetsLoaded"
@@ -63,6 +73,18 @@
     
     >
     </a-entity>
+
+    <a-entity
+      v-if="allAssetsLoaded"
+      gltf-model="#map3"
+      rotation="0 90 0"
+      position="0 0 -5"
+      scale="1 1.1 1"
+
+    >
+    
+    </a-entity>
+
     <TheNavMesh />
 
     <TheCameraRig />
