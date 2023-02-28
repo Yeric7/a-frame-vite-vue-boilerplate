@@ -73,7 +73,7 @@
       gltf-model="#mushroom"
       position="-6.633 0.5 -13.754"
       scale="0.5 0.5 0.5"
-      
+      animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
       grabbable="target:#hand-right"
       clickable
     ></a-entity>
