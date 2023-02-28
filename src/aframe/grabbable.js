@@ -1,6 +1,7 @@
 AFRAME.registerComponent('grabbable', {
   schema: {
     target: {type: 'selector', default: '#camera-rig'},
+    offset: {type: 'vec3', default: {x: 0, y: 0.5, z: 0.5}}
   },
 
   init: function () {
@@ -10,14 +11,11 @@ AFRAME.registerComponent('grabbable', {
     this.pos = new THREE.Vector3();
     this.rot = new THREE.Quaternion();
     this.target = null;
-    this.grabOffset = new THREE.Vector3();
     this.el.addEventListener('click', evt => this.grab(evt));
   },
 
   grab: function (evt) {
     this.target = this.data.target;
-    const controllerPos = new THREE.Vector3().setFromMatrixPosition(evt.detail.intersection.object.matrixWorld);
-    this.grabOffset = new THREE.Vector3().subVectors(this.el.object3D.position, controllerPos);
   },
 
   reset: function () {
@@ -28,8 +26,16 @@ AFRAME.registerComponent('grabbable', {
     if (this.target === null) return;
     // calculate distance to target
     this.data.target.object3D.getWorldPosition(this.targetPos);
+    // offset the grab position based on the asset dimensions
+    const assetBox = new THREE.Box3().setFromObject(this.el.object3D);
+    const assetSize = assetBox.getSize(new THREE.Vector3());
+    this.targetPos.add(new THREE.Vector3(
+      this.data.offset.x * assetSize.x,
+      this.data.offset.y * assetSize.y,
+      this.data.offset.z * assetSize.z
+    ));
+    // and copy rotation
     this.el.object3D.position.copy(this.targetPos);
-    this.el.object3D.position.add(this.grabOffset);
     this.el.object3D.rotation.copy(this.data.target.object3D.rotation);
   }
 });
