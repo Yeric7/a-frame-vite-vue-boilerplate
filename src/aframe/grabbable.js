@@ -17,7 +17,11 @@ AFRAME.registerComponent('grabbable', {
       const center = new THREE.Vector3();
       boundingBox.getCenter(center);
       this.el.object3D.position.copy(center);
+    
+      // Set the scale of the object's object3D property to half of its current value
+      this.el.object3D.scale.set(0.5, 0.5, 0.5);
     },
+    
     reset: function () {
       this.el.object3D.position.set(this.initialPos.x, this.initialPos.y, this.initialPos.z);
     },
