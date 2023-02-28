@@ -13,13 +13,10 @@ AFRAME.registerComponent('grabbable', {
   },
   grab: function (evt) {
     this.target = this.data.target;
-    const boundingBox = new THREE.Box3().setFromObject(this.el.object3D);
-    const center = new THREE.Vector3();
-    boundingBox.getCenter(center);
-    this.el.object3D.position.copy(center);
-
+ 
     // Scale down the object
-    this.el.object3D.scale.set(0.5, 0.5, 0.5);
+    this.el.object3D.scale.set(0.25, 0.25, 0.25);
+    
   },
   reset: function () {
     this.el.object3D.position.set(
