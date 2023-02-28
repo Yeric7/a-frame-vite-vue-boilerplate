@@ -20,13 +20,13 @@ AFRAME.registerComponent('grabbable', {
     tick: function () {
       if (this.target === null) return;
       // calculate distance to target
-      // this.data.target.object3D.getWorldPosition(this.targetPos);
+      this.data.target.object3D.getWorldPosition(this.targetPos);
       // this.el.object3D.getWorldPosition(this.pos);
       // this.pos.sub(this.targetPos);
       // // apply the calcultated distance to the entity
       // this.el.object3D.position.sub(this.pos);
       // and copy rotation
-      this.el.object3D.position.copy(this.data.target.object3D.position);
+      this.el.object3D.position.copy(this.targetPos);
       this.el.object3D.rotation.copy(this.data.target.object3D.rotation);
     }
   });
