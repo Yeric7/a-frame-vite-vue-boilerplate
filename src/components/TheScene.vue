@@ -41,6 +41,8 @@
       <a-asset-item  id="map1" src="assets/MapForestChampi.glb"></a-asset-item>
       <a-asset-item  id="map2" src="assets/MapAvecAnimaux.glb" ></a-asset-item>
       <a-asset-item  id="map3" src="assets/ilo.glb" ></a-asset-item>
+      <a-asset-item  id="mushroom" src="assets/glowing_mushroom.glb" ></a-asset-item>
+
     </a-assets>
 
     <a-entity
@@ -50,9 +52,8 @@
       position="0 -15 -5"
       scale="1 1.1 1"
       animation-mixer
-    >
-    
-    </a-entity>
+    >   </a-entity>
+
   <!--   <a-entity
       v-if="allAssetsLoaded"
       gltf-model="#map1"
@@ -70,9 +71,7 @@
       position="50 0 -55"
       scale="1 1.1 1"
       animation-mixer
-    
-    >
-    </a-entity>
+    >   </a-entity>
 
     <a-entity
       v-if="allAssetsLoaded"
@@ -80,10 +79,17 @@
       rotation="0 90 0"
       position="0 0 -5"
       scale="1 1.1 1"
+    > </a-entity>
 
-    >
-    
-    </a-entity>
+    <a-entity
+  v-if="allAssetsLoaded"
+  gltf-model="#mushroom"
+  position="-6.633 0.336 -13.754"
+  scale="0.5 0.5 0.5"
+  animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
+  grabbable ="target: #hand-right"
+  clickable
+></a-entity>
 
     <TheNavMesh />
 
