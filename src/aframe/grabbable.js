@@ -1,7 +1,7 @@
 AFRAME.registerComponent('grabbable', {
   schema: {
     target: {type: 'selector', default: '#camera-rig'},
-    offset: {type: 'vec3', default: {x: 0, y: 0.5, z: 0.5}}
+    offset: {type: 'vec3', default: {x: 0, y: 0.5, z: 0.1}}
   },
 
   init: function () {
