@@ -71,10 +71,10 @@
     <a-entity
       v-if="allAssetsLoaded"
       gltf-model="#mushroom"
-      position="-6.633 0.336 -13.754"
+      position="-6.633 0.5 -13.754"
       scale="0.5 0.5 0.5"
       
-      grabbable="target:#hand-right; scale: 0.5"
+      grabbable="target:#hand-right"
       clickable
     ></a-entity>
 <!-- animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
