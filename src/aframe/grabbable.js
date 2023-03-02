@@ -1,6 +1,7 @@
 AFRAME.registerComponent('grabbable', {
   schema: {
     target: { type: 'selector', default: '#camera-rig' },
+    threshold: { type: 'number', default: 0.2 }
   },
   init: function () {
     this.initialPos = { ...this.el.object3D.position };
@@ -23,10 +24,16 @@ AFRAME.registerComponent('grabbable', {
     // Save a reference to this component for use in the callback
     const self = this;
   
-    // Wait 2 seconds and then emit another custom event to simulate the mushroom being eaten
-    setTimeout(function() {
-      self.el.emit('eaten');
-    }, 2000);
+    // Check distance to camera rig every 100ms, and emit 'eaten' event if close enough
+    this.interval = setInterval(function() {
+      self.data.target.object3D.getWorldPosition(self.targetPos);
+      self.el.object3D.getWorldPosition(self.pos);
+      const distance = self.pos.distanceTo(self.targetPos);
+      if (distance < self.data.threshold) {
+        self.el.emit('eaten');
+        clearInterval(self.interval);
+      }
+    }, 100);
   },
   
   reset: function () {
