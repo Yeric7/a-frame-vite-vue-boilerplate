@@ -29,7 +29,7 @@ AFRAME.registerComponent('grabbable', {
       self.data.target.object3D.getWorldPosition(self.targetPos);
       self.el.object3D.getWorldPosition(self.pos);
       const distance = self.pos.distanceTo(self.targetPos);
-      if (distance < self.data.threshold) {
+      if (distance < 0.1) {
         self.el.emit('eaten');
         clearInterval(self.interval);
       }
