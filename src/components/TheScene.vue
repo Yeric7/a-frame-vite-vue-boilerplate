@@ -43,12 +43,13 @@ const onMushroomEaten = () => {
 
   // Get the map entity and move it
   const mapEntity = instance.refs.mapEntity;
-  mapEntity.setAttribute('animation', {
-    property: 'position',
-    to: '0 0 -1155',
-    dur: 5000,
-    easing: 'linear'
-  });
+mapEntity.setAttribute('animation', {
+  property: 'position',
+  to: '0 0 -1155',
+  dur: 5000,
+  easing: 'linear',
+  delay: 2000
+});
 }
 
 let instance;
@@ -111,7 +112,7 @@ console.log('animation terminée');
   scale="0.5 0.5 0.5"
   animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
   id="mushroom-entity"
-  grabbable="target: #camera-rig;"
+  grabbable="target: #hand-right;"
   clickable
   v-on:grabbed="onMushroomGrabbed"
   v-on:eaten="onMushroomEaten"
