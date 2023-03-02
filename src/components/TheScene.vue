@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, getCurrentInstance  } from "vue";
 
 import TheCameraRig from "./TheCameraRig.vue";
 import TheNavMesh from "./TheNavMesh.vue";
@@ -34,14 +34,30 @@ const onMushroomGrabbed = () => {
 const onMushroomEaten = () => {
   // Do something when the mushroom is eaten
   console.log('Mushroom eaten!');
-  
-  /* if (eatSoundLoaded.value) { */
+
+  if (eatSoundLoaded.value) {
     eatSound.play();
-  
-  /* } else {
+  } else {
     console.log("Sound not loaded yet. It will be played once it finished loading.");
-  } */
+  }
+
+  // Get the map entity and move it
+  const mapEntity = instance.refs.mapEntity;
+  mapEntity.setAttribute('animation', {
+    property: 'position',
+    to: '0 0 -1155',
+    dur: 5000,
+    easing: 'linear'
+  });
 }
+
+let instance;
+
+onMounted(() => {
+  instance = getCurrentInstance();
+});
+
+console.log('animation terminée');
 </script>
 
 
@@ -61,19 +77,20 @@ const onMushroomEaten = () => {
     </a-assets>
 
     <a-entity
-      v-if="allAssetsLoaded"
-      gltf-model="#map1"
-      rotation="0 90 0"
-      position="0 -15 -5"
-      scale="1 1.1 1"
-    >
-    </a-entity>
+  v-if="allAssetsLoaded"
+  gltf-model="#map1"
+  rotation="0 90 0"
+  position="0 0 -5"
+  scale="1 1.1 1"
+  ref="mapEntity"
+></a-entity>
+
 
     <a-entity
       v-if="allAssetsLoaded"
       gltf-model="#map2"
       rotation="0 90 0"
-      position="50 0 -55"
+      position="50 -1 -55"
       scale="1 1.1 1"
       animation-mixer
     ></a-entity>
@@ -100,6 +117,9 @@ const onMushroomEaten = () => {
   v-on:eaten="onMushroomEaten"
   sound="src: #eat-sound; on: eaten"
 ></a-entity>
+
+
+
 
     <!-- animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
  -->

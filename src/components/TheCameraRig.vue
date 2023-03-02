@@ -18,7 +18,7 @@
        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
         disable-in-vr="component: simple-navmesh-constraint;"
         camera
-        position="0 1.7 0"
+        position="-6 1.7 -10"
       >
         <a-entity
           geometry="primitive: circle; radius: 0.0003;"
