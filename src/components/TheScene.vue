@@ -46,7 +46,7 @@ const onMushroomEaten = () => {
 mapEntity.setAttribute('animation', {
   property: 'position',
   to: '0 0 -1155',
-  dur: 5000,
+  dur: 10000,
   easing: 'linear',
   delay: 2000
 });
