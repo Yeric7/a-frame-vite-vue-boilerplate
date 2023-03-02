@@ -1,7 +1,7 @@
 AFRAME.registerComponent('grabbable', {
   schema: {
     target: { type: 'selector', default: '#camera-rig' },
-    threshold: { type: 'number', default: 0.2 }
+    threshold: { type: 'number', default: 0.5 }
   },
   init: function () {
     this.initialPos = { ...this.el.object3D.position };
