@@ -2,7 +2,7 @@ AFRAME.registerComponent('grabbable', {
   schema: {
     target: { type: 'selector', default: '#camera-rig' },
     threshold: { type: 'number', default: 0.2 },
-    distance: { type: 'number', default: 0.5 },
+    distance: { type: 'number', default: 0.2 },
   },
   init: function () {
     this.initialPos = { ...this.el.object3D.position };
@@ -24,27 +24,12 @@ AFRAME.registerComponent('grabbable', {
   
     // Save a reference to this component for use in the callback
     const self = this;
-
-    const head = this.target.getObject3D('head');
-    const hand = this.target.getObject3D('hand-right');
-
-    // Wait for the hand to be close enough to the head to emit the "eaten" event
-    const checkDistance = setInterval(function() {
-      if (hand.position.distanceTo(head.position) < self.data.distance) {
-        clearInterval(checkDistance);
-        self.el.emit('eaten');
-      }
-    }, 100);
-
-    // Reset the object's position if it is dropped
-    this.el.sceneEl.addEventListener('grab-end', (evt) => {
-      if (evt.detail.el === this.el) {
-        clearInterval(checkDistance);
-        this.reset();
-      }
-    });
-  },
   
+    // Wait 2 seconds and then emit another custom event to simulate the mushroom being eaten
+    setTimeout(function() {
+      self.el.emit('eaten');
+    }, 2000);
+  },
   reset: function () {
     this.el.object3D.position.set(
       this.initialPos.x,
@@ -56,8 +41,16 @@ AFRAME.registerComponent('grabbable', {
     if (this.target === null) return;
 
     this.data.target.object3D.getWorldPosition(this.targetPos);
+    this.el.object3D.getWorldPosition(this.pos);
+    const distance = this.pos.distanceTo(this.targetPos);
 
-    this.el.object3D.position.copy(this.targetPos);
+    if (distance <= this.data.distance) {
+      this.el.emit('eaten');
+    }
+    
     this.el.object3D.rotation.copy(this.data.target.object3D.rotation);
+    if (distance <= this.data.threshold) {
+      this.el.object3D.position.copy(this.targetPos);
+    }
   },
 });
