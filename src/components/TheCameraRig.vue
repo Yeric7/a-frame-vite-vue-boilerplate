@@ -39,7 +39,7 @@
     id="camera-rig"
     movement-controls="camera: #head; speed: 0.6;"
     disable-in-vr="component: movement-controls;"
-    position="-6 1.7 -10"
+    
   >
         
 
