@@ -32,19 +32,20 @@ const onMushroomGrabbed = () => {
 
 const loopScale = (el) => {
   AFRAME.ANIME({
-    targets: '#camera-rig #head',
-      // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
-      // scale: '1.1 1 1',
-      // rotation: '0 1 0',
-      rotation: () => `${AFRAME.ANIME.random(0.5, 1)} ${AFRAME.ANIME.random(0,1)} ${AFRAME.ANIME.random(1, 1)}`,
-      easing: 'easeInOutSine',
-      direction: 'alternate',
-      loop: true,
+    targets: "#camera-rig #head",
+    // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
+    // scale: '1.1 1 1',
+    // rotation: '0 1 0',
+    rotation: () =>
+      `${AFRAME.ANIME.random(0.5, 1)} ${AFRAME.ANIME.random(
+        0,
+        1
+      )} ${AFRAME.ANIME.random(1, 1)}`,
+    easing: "easeInOutSine",
+    direction: "alternate",
+    loop: true,
     duration: 1000,
-
   });
-
-  
 };
 
 const onMushroomEaten = () => {
@@ -63,26 +64,26 @@ const onMushroomEaten = () => {
   const mapEntity = instance.refs.mapEntity;
   const mapEntity2 = instance.refs.mapEntity2;
 
-// Move to first position
-mapEntity.setAttribute("animation", {
-  property: "position",
-  to: "0 0 -1155",
-  dur: 3000,
-  easing: "linear",
-  delay: 1500,
-});
-
-// Wait for the animation to complete and then move to second position
-setTimeout(() => {
+  // Move to first position
   mapEntity.setAttribute("animation", {
     property: "position",
-    to: "0 -10000 -1155",
-    dur: 500,
+    to: "0 0 -1155",
+    dur: 3000,
     easing: "linear",
-  }  );
-}, 3000); 
+    delay: 1500,
+  });
 
-   // Get the 2map entity and move it
+  // Wait for the animation to complete and then move to second position
+  setTimeout(() => {
+    mapEntity.setAttribute("animation", {
+      property: "position",
+      to: "0 -10000 -1155",
+      dur: 500,
+      easing: "linear",
+    });
+  }, 3000);
+
+  // Get the 2map entity and move it
   mapEntity2.setAttribute("animation", {
     property: "position",
     to: "0 0 -5",
@@ -95,7 +96,7 @@ setTimeout(() => {
   // const cameraRigEntity = document.querySelector("#camera-rig");
   // cameraRigEntity.setAttribute("scale", "1. 1 1");
   // loopScale(cameraRigEntity);
-  const playerHead = document.querySelector('#camera-rig #head');
+  const playerHead = document.querySelector("#camera-rig #head");
   loopScale(playerHead);
 
   delay: 1500;
@@ -114,9 +115,7 @@ console.log("animation terminée");
 
 
 <template>
-  <a-scene  renderer="colorManagement: true;" sound >
-
-    
+  <a-scene renderer="colorManagement: true;" sound>
     <!-- fog="type: linear; color: #DFE4E6" -->
     <a-assets @loaded="allAssetsLoaded = true">
       <!--
@@ -131,7 +130,7 @@ console.log("animation terminée");
       -->
 
       <!-- test -->
-      <img id="sky" src="/assets/sky2.jpg">
+      <img id="sky" src="/assets/sky2.jpg" />
 
       <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item>
 
@@ -147,19 +146,42 @@ console.log("animation terminée");
         src="assets/glowing_mushroom.glb"
       ></a-asset-item>
       <!--  <audio id="eat-sound" src="assets/mushroomSon.mp3"></audio> -->
-      <a-assets-item     v-if="eatSoundLoaded"    id="eat-sound"        src="#eat-sound"      ></a-assets-item>
+      <a-assets-item
+        v-if="eatSoundLoaded"
+        id="eat-sound"
+        src="#eat-sound"
+      ></a-assets-item>
 
-     <!--  <audio src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav" autoplay
+      <!--  <audio src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav" autoplay
       preload></audio> -->
-    
 
-      <a-asset-item id="son-flute" response-type="arraybuffer" src="assets/Flute.mp3" preload="auto"></a-asset-item>
-      <a-asset-item id="son-macarena" response-type="arraybuffer" src="assets/Macarena.mp3" preload="auto"></a-asset-item>
-      <a-asset-item id="son-gandalf" response-type="arraybuffer" src="assets/Gandalf.mp3" preload="auto"></a-asset-item>
+      <a-asset-item
+        id="son-mushroom"
+        response-type="arraybuffer"
+        src="assets/Mushroom.mp3"
+        preload="auto"
+      ></a-asset-item>
+      <a-asset-item
+        id="son-flute"
+        response-type="arraybuffer"
+        src="assets/Flute.mp3"
+        preload="auto"
+      ></a-asset-item>
+      <a-asset-item
+        id="son-macarena"
+        response-type="arraybuffer"
+        src="assets/Macarena.mp3"
+        preload="auto"
+      ></a-asset-item>
+      <a-asset-item
+        id="son-gandalf"
+        response-type="arraybuffer"
+        src="assets/Gandalf.mp3"
+        preload="auto"
+      ></a-asset-item>
     </a-assets>
-   
+
     <a-sky src="#sky" v-if="allAssetsLoaded"></a-sky>
- 
 
     <a-entity
       v-if="allAssetsLoaded"
@@ -168,29 +190,35 @@ console.log("animation terminée");
       position="0 0 -5"
       scale="1 1.1 1"
       ref="mapEntity"
-      
-    ></a-entity>
+    >
+      <a-entity
+        sound="src: #son-mushroom; autoplay: true; maxDistance: 200; loop: true; volume: 10; on: loaded"
+        position="8 10 -9"
+      ></a-entity>
+    </a-entity>
 
     <a-entity
-  v-if="allAssetsLoaded"
-  gltf-model="#map2"
-  rotation="0 90 0"
-  position="0 0 -11155"
-  scale="1 1.1 1"
-  animation-mixer
-  ref="mapEntity2">
-  
-  <a-entity sound="src: #son-flute; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
-  position="8 1.5 -9"
-  ></a-entity>
-  <a-entity sound="src: #son-macarena; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
-  position="-1 1.5 0"
-  ></a-entity>
-  <a-entity sound="src: #son-gandalf; autoplay: true; maxDistance: 50; loop: true; volume: 2; on: loaded"
-  position="25 1.5 -8"
-  ></a-entity>
-</a-entity>
-
+      v-if="allAssetsLoaded"
+      gltf-model="#map2"
+      rotation="0 90 0"
+      position="0 0 -11155"
+      scale="1 1.1 1"
+      animation-mixer
+      ref="mapEntity2"
+    >
+      <a-entity
+        sound="src: #son-flute; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
+        position="8 1.5 -9"
+      ></a-entity>
+      <a-entity
+        sound="src: #son-macarena; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
+        position="-1 1.5 0"
+      ></a-entity>
+      <a-entity
+        sound="src: #son-gandalf; autoplay: true; maxDistance: 50; loop: true; volume: 2; on: loaded"
+        position="25 1.5 -8"
+      ></a-entity>
+    </a-entity>
 
     <a-entity
       v-if="allAssetsLoaded"
@@ -215,23 +243,23 @@ console.log("animation terminée");
       sound="src: #eat-sound; on: eaten"
     ></a-entity>
 
-
-
-<!--     Clouds:
- --> 
- <a-entity
+    <!--     Clouds:
+ -->
+    <a-entity
       v-if="allAssetsLoaded"
       gltf-model="#cloud1"
       rotation="0 0 0"
       position="0 0 -35"
       scale="10 10 10"
     >
- </a-entity>
- 
+    </a-entity>
 
- <a-entity geometry="primitive: box" material="envMap: #sky; roughness: 10"></a-entity>  
+    <a-entity
+      geometry="primitive: box"
+      material="envMap: #sky; roughness: 10"
+    ></a-entity>
 
- <!-- animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
+    <!-- animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
  -->
     <TheNavMesh />
 
