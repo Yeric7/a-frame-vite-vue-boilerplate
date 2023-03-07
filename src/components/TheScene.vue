@@ -125,7 +125,10 @@ console.log("animation terminée");
         "Glowing Mushroom" (https://skfb.ly/otXoo) by rabbiturnal / (http://creativecommons.org/licenses/by/4.0/)
 
       -->
+
+      <!-- test -->
       <img id="sky" src="assets/sky2.jpg">
+
       <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item>
 
       <a-asset-item id="map1" src="assets/MapForestChampi.glb"></a-asset-item>
