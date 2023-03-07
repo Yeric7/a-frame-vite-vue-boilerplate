@@ -32,11 +32,11 @@ const onMushroomGrabbed = () => {
 
 const loopScale = (el) => {
   AFRAME.ANIME({
-    targets: '[camera]',
-      // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
-      // scale: '1.1 1 1',
-      // rotation: '0 1 0',
-      rotation: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(0,1)} ${AFRAME.ANIME.random(1, 1)}`,
+    targets: '#camera-rig',
+      scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
+      scale: '1.1 1 1',
+      rotation: '0 1 0',
+      // rotation: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(0,1)} ${AFRAME.ANIME.random(1, 1)}`,
       easing: 'easeInOutSine',
       direction: 'alternate',
       loop: true,
@@ -92,11 +92,11 @@ setTimeout(() => {
   });
 
   // Get the camera rig entity and scale it
-  // const cameraRigEntity = document.querySelector("#camera-rig");
-  // cameraRigEntity.setAttribute("scale", "1. 1 1");
-  // loopScale(cameraRigEntity);
-  const playerHead = document.querySelector('[camera]');
-  loopScale(playerHead);
+  const cameraRigEntity = document.querySelector("#camera-rig");
+  cameraRigEntity.setAttribute("scale", "1. 1 1");
+  loopScale(cameraRigEntity);
+  // const playerHead = document.querySelector('[camera]');
+  // loopScale(playerHead);
 
   delay: 1500;
 };
