@@ -32,7 +32,7 @@ const onMushroomGrabbed = () => {
 
 const loopScale = (el) => {
   AFRAME.ANIME({
-    targets: '[camera]',
+    targets: '#camera-rig #head',
       // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
       // scale: '1.1 1 1',
       // rotation: '0 1 0',
