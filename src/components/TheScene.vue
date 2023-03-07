@@ -32,7 +32,7 @@ const onMushroomGrabbed = () => {
 
 const loopScale = (el) => {
   AFRAME.ANIME({
-    targets: '#camera-rig',
+    targets: '[camera]',
       // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
       // scale: '1.1 1 1',
       // rotation: '0 1 0',
@@ -67,9 +67,9 @@ const onMushroomEaten = () => {
 mapEntity.setAttribute("animation", {
   property: "position",
   to: "0 0 -1155",
-  dur: 2000,
+  dur: 3000,
   easing: "linear",
-  delay: 2000,
+  delay: 1500,
 });
 
 // Wait for the animation to complete and then move to second position
@@ -77,10 +77,10 @@ setTimeout(() => {
   mapEntity.setAttribute("animation", {
     property: "position",
     to: "0 -10000 -1155",
-    dur: 100,
+    dur: 500,
     easing: "linear",
   }  );
-}, 2500); 
+}, 3000); 
 
    // Get the 2map entity and move it
   mapEntity2.setAttribute("animation", {
@@ -92,9 +92,13 @@ setTimeout(() => {
   });
 
   // Get the camera rig entity and scale it
-  const cameraRigEntity = document.querySelector("#camera-rig");
-  cameraRigEntity.setAttribute("scale", "1. 1 1");
-  loopScale(cameraRigEntity);
+  // const cameraRigEntity = document.querySelector("#camera-rig");
+  // cameraRigEntity.setAttribute("scale", "1. 1 1");
+  // loopScale(cameraRigEntity);
+  const playerHead = document.querySelector('[camera]');
+  loopScale(playerHead);
+
+  delay: 1500;
 };
 
 let instance;
