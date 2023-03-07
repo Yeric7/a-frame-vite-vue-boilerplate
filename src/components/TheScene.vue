@@ -36,7 +36,7 @@ const loopScale = (el) => {
       // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
       // scale: '1.1 1 1',
       // rotation: '0 1 0',
-      rotation: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(0,1)} ${AFRAME.ANIME.random(1, 1)}`,
+      rotation: () => `${AFRAME.ANIME.random(0.5, 1)} ${AFRAME.ANIME.random(0,1)} ${AFRAME.ANIME.random(1, 1)}`,
       easing: 'easeInOutSine',
       direction: 'alternate',
       loop: true,
