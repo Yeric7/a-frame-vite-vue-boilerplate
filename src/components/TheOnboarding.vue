@@ -18,13 +18,15 @@
 <template>
   <div id="onboarding" v-if="showOnboarding">
     <div>
-      <h1>A-Frame + Vite + Vue Boilerplate</h1>
+      <h1>Yeric VR - The mushroom project</h1>
       <p v-if="!loaded">loading...</p>
       <button v-if="loaded" @click="enterScene()">Enter scene</button>
       <div class="licences">
         <dl>
           <dt>
             <i>Included</i>
+
+              
           </dt>
           <dt>
             <a href="https://github.com/c-frame/aframe-extras" target="_blank">aframe-extras controls and animation-mixer</a>
@@ -45,12 +47,27 @@
           </dd>
 
           <dt>
-            <a href="https://sketchfab.com/3d-models/vr-gallery-1ac32ed62fdf424498acc146fad31f7e" target="_blank">VR Gallery</a>
-          </dt><dd>
-            by <a href="https://sketchfab.com/mvrc.art" target="_blank">Maxim Mavrichev</a>
-            under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
+            <a href="https://skfb.ly/69WTw" target="_blank">The Living Forest by proxy_doug</a>
+         </dt><dd>
+            under <a href="(http://creativecommons.org/licenses/by/4.0/)" target="_blank">CC BY 4.0</a>
+          </dd>
+          <dt>
+            <a href="https://skfb.ly/orrFy" target="_blank">Stylized mushrooms by QumoDone</a>
+         </dt><dd>
+            under <a href="(http://creativecommons.org/licenses/by/4.0/)" target="_blank">CC BY 4.0</a>
+          </dd>
+          <dt>
+            <a href="https://skfb.ly/otXoo" target="_blank">Glowing Mushroom by rabbiturnal</a>
+         </dt><dd>
+            under <a href="(http://creativecommons.org/licenses/by/4.0/)" target="_blank">CC BY 4.0</a>
+          </dd>
+          <dt>
+            <a href="https://skfb.ly/oxIVp" target="_blank">Musical Notes by Gustavo.Fabi</a>
+         </dt><dd>
+            under <a href="(http://creativecommons.org/licenses/by/4.0/)" target="_blank">CC BY 4.0</a>
           </dd>
         </dl>
+    
       </div>
     </div>
   </div>
