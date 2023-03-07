@@ -127,7 +127,7 @@ console.log("animation terminée");
       -->
 
       <!-- test -->
-      <img id="sky" src="assets/sky2.jpg">
+      <img id="sky" src="/assets/sky2.jpg">
 
       <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item>
 
