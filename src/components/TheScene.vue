@@ -151,7 +151,11 @@ console.log("animation terminée");
 
      <!--  <audio src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav" autoplay
       preload></audio> -->
-  
+    
+
+      <a-asset-item id="son-flute" response-type="arraybuffer" src="assets/Flute.mp3" preload="auto"></a-asset-item>
+      <a-asset-item id="son-macarena" response-type="arraybuffer" src="assets/Macarena.mp3" preload="auto"></a-asset-item>
+      <a-asset-item id="son-gandalf" response-type="arraybuffer" src="assets/Gandalf.mp3" preload="auto"></a-asset-item>
     </a-assets>
    
     <a-sky src="#sky" v-if="allAssetsLoaded"></a-sky>
@@ -168,14 +172,25 @@ console.log("animation terminée");
     ></a-entity>
 
     <a-entity
-      v-if="allAssetsLoaded"
-      gltf-model="#map2"
-      rotation="0 90 0"
-      position="0 0 -11155"
-      scale="1 1.1 1"
-      animation-mixer
-      ref="mapEntity2"
-    ></a-entity>
+  v-if="allAssetsLoaded"
+  gltf-model="#map2"
+  rotation="0 90 0"
+  position="0 0 -11155"
+  scale="1 1.1 1"
+  animation-mixer
+  ref="mapEntity2">
+  
+  <a-entity sound="src: #son-flute; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
+  position="8 1.5 -9"
+  ></a-entity>
+  <a-entity sound="src: #son-macarena; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
+  position="-1 1.5 0"
+  ></a-entity>
+  <a-entity sound="src: #son-gandalf; autoplay: true; maxDistance: 50; loop: true; volume: 2; on: loaded"
+  position="25 1.5 -8"
+  ></a-entity>
+</a-entity>
+
 
     <a-entity
       v-if="allAssetsLoaded"
