@@ -66,6 +66,16 @@ console.log('animation terminée');
 <template>
   <a-scene background="color: black;" renderer="colorManagement: true;" sound>
     <a-assets @loaded="allAssetsLoaded = true">
+     <!--
+        Title: Yeric VR
+        Model source:
+        Map: "The Living Forest" (https://skfb.ly/69WTw) by proxy_doug / (http://creativecommons.org/licenses/by/4.0/).
+        Object : 
+        "Stylized mushrooms" (https://skfb.ly/orrFy) by QumoDone / (http://creativecommons.org/licenses/by/4.0/)
+        "Musical Notes" (https://skfb.ly/oxIVp) by Gustavo.Fabi / (http://creativecommons.org/licenses/by/4.0/)
+        "Glowing Mushroom" (https://skfb.ly/otXoo) by rabbiturnal / (http://creativecommons.org/licenses/by/4.0/)
+
+      -->
      
       <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item>
 
