@@ -8,6 +8,7 @@ import TheLifeCubeRoom from "./TheLifeCubeRoom.vue";
 
 import "../aframe/animation-mixer";
 import "../aframe/life-like-automaton.js";
+import "../aframe/life-like-automaton2.js";
 import "../aframe/teleport-camera-rig.js";
 import "../aframe/grabbable.js";
 
@@ -25,6 +26,10 @@ eatSound.src = "assets/mushroomSon.mp3";
 eatSound.addEventListener("canplaythrough", () => {
   eatSoundLoaded.value = true;
 });
+
+const revealSound = new Audio();
+revealSound.src = "assets/Reveal.mp3";
+
 
 const onMushroomGrabbed = () => {
   // Do something when the mushroom is grabbed
@@ -55,6 +60,11 @@ const onMushroomEaten = () => {
 
   if (eatSoundLoaded.value) {
     eatSound.play();
+
+    //Player another sound afeter 2 seconds
+    setTimeout(() => {
+      revealSound.play();
+    }, 2000);
   } else {
     console.log(
       "Sound not loaded yet. It will be played once it finished loading."
@@ -79,7 +89,7 @@ const onMushroomEaten = () => {
     mapEntity.setAttribute("animation", {
       property: "position",
       to: "0 -10000 -1155",
-      dur: 500,
+      dur: 1000,
       easing: "linear",
     });
   }, 3000);
@@ -88,7 +98,7 @@ const onMushroomEaten = () => {
   mapEntity2.setAttribute("animation", {
     property: "position",
     to: "0 0 -5",
-    dur: 2500,
+    dur: 17000,
     easing: "linear",
     delay: 200,
   });
@@ -158,6 +168,7 @@ console.log("animation terminée");
       <a-asset-item        id="son-flute"        response-type="arraybuffer"        src="assets/Flute.mp3"        preload="auto"      ></a-asset-item>
       <a-asset-item        id="son-macarena"        response-type="arraybuffer"        src="assets/Macarena.mp3"        preload="auto"      ></a-asset-item>
       <a-asset-item        id="son-gandalf"        response-type="arraybuffer"        src="assets/Gandalf.mp3"        preload="auto"      ></a-asset-item>
+      <a-asset-item        id="son-reveal"        response-type="arraybuffer"        src="assets/Reveal.mp3"        preload="auto"      ></a-asset-item>
     
       <video id="video" src="/assets/videotexture.mp4" autoplay="true"></video>
     </a-assets>
@@ -212,18 +223,18 @@ console.log("animation terminée");
       ref="mapEntity2"
     >
       <a-entity
-        sound="src: #son-flute; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
+        sound="src: #son-flute; autoplay: true; maxDistance: 3; loop: true; volume: 2; on: loaded"
         position="8 1.5 -9"
       ></a-entity>
       <a-entity
-        sound="src: #son-macarena; autoplay: true; maxDistance: 5; loop: true; volume: 2; on: loaded"
+        sound="src: #son-macarena; autoplay: true; maxDistance: 3; loop: true; volume: 2; on: loaded"
         position="-1 1.5 0"
       ></a-entity>
       <a-entity
-        sound="src: #son-gandalf; autoplay: true; maxDistance: 50; loop: true; volume: 2; on: loaded"
+        sound="src: #son-gandalf; autoplay: true; maxDistance: 10; loop: true; volume: 7; on: loaded"
         position="25 1.5 -8"
       ></a-entity>
-      <a-plane position="11 0.2 -4.8" rotation="-90 -90 0" width="40" height="40"  life-like-automaton></a-plane>
+      <a-plane position="11 0.2 -4.8" rotation="-90 -90 0" width="40" height="40"  life-like-automaton2></a-plane>
       <a-sphere position="0 1.25 -5" radius="35" life-like-automaton></a-sphere>
     </a-entity>
 
