@@ -11,6 +11,7 @@ import "../aframe/life-like-automaton.js";
 import "../aframe/teleport-camera-rig.js";
 import "../aframe/grabbable.js";
 
+
 defineProps({
   scale: Number,
   overlaySelector: String,
@@ -142,46 +143,50 @@ console.log("animation terminée");
       <a-asset-item id="cloud3" src="assets/cloud3.glb"></a-asset-item>
 
       <a-asset-item
-        id="mushroom"
-        src="assets/glowing_mushroom.glb"
+        id="map4"
+        src="assets/MapAvecAnimauxEtTexture.glb"
       ></a-asset-item>
+
+      <a-asset-item id="mushroom" src="assets/glowing_mushroom.glb"  ></a-asset-item>
       <!--  <audio id="eat-sound" src="assets/mushroomSon.mp3"></audio> -->
-      <a-assets-item
-        v-if="eatSoundLoaded"
-        id="eat-sound"
-        src="#eat-sound"
-      ></a-assets-item>
+      <a-assets-item v-if="eatSoundLoaded"  id="eat-sound"  src="#eat-sound"      ></a-assets-item>
 
       <!--  <audio src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav" autoplay
       preload></audio> -->
 
-      <a-asset-item
-        id="son-mushroom"
-        response-type="arraybuffer"
-        src="assets/Mushroom.mp3"
-        preload="auto"
-      ></a-asset-item>
-      <a-asset-item
-        id="son-flute"
-        response-type="arraybuffer"
-        src="assets/Flute.mp3"
-        preload="auto"
-      ></a-asset-item>
-      <a-asset-item
-        id="son-macarena"
-        response-type="arraybuffer"
-        src="assets/Macarena.mp3"
-        preload="auto"
-      ></a-asset-item>
-      <a-asset-item
-        id="son-gandalf"
-        response-type="arraybuffer"
-        src="assets/Gandalf.mp3"
-        preload="auto"
-      ></a-asset-item>
+      <a-asset-item        id="son-mushroom"        response-type="arraybuffer"        src="assets/Mushroom.mp3"        preload="auto"      ></a-asset-item>
+      <a-asset-item        id="son-flute"        response-type="arraybuffer"        src="assets/Flute.mp3"        preload="auto"      ></a-asset-item>
+      <a-asset-item        id="son-macarena"        response-type="arraybuffer"        src="assets/Macarena.mp3"        preload="auto"      ></a-asset-item>
+      <a-asset-item        id="son-gandalf"        response-type="arraybuffer"        src="assets/Gandalf.mp3"        preload="auto"      ></a-asset-item>
+    
+      <video id="video" src="/assets/videotexture.mp4" autoplay="true"></video>
     </a-assets>
 
     <a-sky src="#sky" v-if="allAssetsLoaded"></a-sky>
+
+    <!-- <a-entity
+    geometry="primitive: box"
+      v-if="allAssetsLoaded"
+      gltf-model="#map4"
+      rotation="0 90 0"
+      position="0 0 -50"
+      scale="1 1.1 1"
+      life-like-automaton
+    >    </a-entity> -->
+
+
+<!--     <a-entity geometry="primitive: plane "
+      v-if="allAssetsLoaded"
+      
+      position="5 5 -4" rotation="-90 0 0" width="1000" height="0"
+           life-like-automaton
+    > -->
+    
+
+<!-- <a-sky src="#sky" v-if="allAssetsLoaded"   position="-11 10 -4.8" scale="0.1 0.1 0.1" life-like-automaton > </a-sky> -->
+ 
+
+
 
     <a-entity
       v-if="allAssetsLoaded"
@@ -218,6 +223,8 @@ console.log("animation terminée");
         sound="src: #son-gandalf; autoplay: true; maxDistance: 50; loop: true; volume: 2; on: loaded"
         position="25 1.5 -8"
       ></a-entity>
+      <a-plane position="11 0.2 -4.8" rotation="-90 -90 0" width="40" height="40"  life-like-automaton></a-plane>
+      <a-sphere position="0 1.25 -5" radius="35" life-like-automaton></a-sphere>
     </a-entity>
 
     <a-entity

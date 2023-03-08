@@ -78,6 +78,9 @@
   </div>
 </template>
 
+<!-- https://www.youtube.com/watch?v=IwLSrNu1ppI 
+Vidéo de Dan Cristian Pădureț: https://www.pexels.com/fr-fr/video/texture-abstrait-colore-mouvement-4365142/-->
+
 <style scoped>
   h1 { font-size: 1.5rem }
   a {

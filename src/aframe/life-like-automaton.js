@@ -1,6 +1,6 @@
 AFRAME.registerComponent('life-like-automaton', {
   schema: {
-    resolution: {type: 'int', default: 512},
+    resolution: {type: 'int', default: 128},
 
     // Change rules to explore different Automaton, the default rules ( B 3,S 23 ) are the one of the classic Game Of Life
     birthRule: {type: 'array', default: [3]},
@@ -46,31 +46,78 @@ AFRAME.registerComponent('life-like-automaton', {
         }
       `,
 
-      fragmentShader: /*glsl*/ `
-        varying vec2 vUv;
-        uniform sampler2D tex;
-        uniform float time;
+      fragmentShader: /*glsl*/ `precision highp float; // mediump or highp
 
-        vec3 hsb2rgb(in vec3 c) {
-          vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
-          rgb = rgb * rgb * (3.0 - 2.0 * rgb);
-          return c.z * mix(vec3(1.0), rgb, c.y);
+      #define PI 3.14159265359
+      #define TWO_PI 6.28318530718
+    
+      uniform float time;
+      uniform vec2 resolution;
+    
+      varying vec2 vUv;
+    
+      vec2 rotate2D(vec2 _st, float _angle){
+        _st -= 0.5;
+        _st =  mat2(cos(_angle),-sin(_angle),
+                    sin(_angle),cos(_angle)) * _st;
+        _st += 0.5;
+        return _st;
+      }
+    
+      vec2 random2(vec2 st){
+        st = vec2( dot(st,vec2(127.1,311.7)),
+                  dot(st,vec2(269.5,183.3)) );
+        return -1.0 + 2.0*fract(sin(st)*43758.5453123);
+      }
+    
+    
+      void main() {
+        vec2 st = vUv;
+    
+        // scale the space
+        vec2 stTemp = fract(st * 20.);
+        float y1 = step(.5,mod(stTemp.x,2.0));
+        float y2 = -1.*step(0.5,1.-mod(stTemp.x,2.0));
+    
+        // scale the space
+        st *= 20.;
+    
+        st = rotate2D(st,PI*0.25 + (y1 + y2)*time/25000.0);
+    
+    
+        vec2 i_st = floor(st);
+        vec2 f_st = fract(st);
+    
+        float m_dist = 1.;  // minimum distance
+        for (int y= -1; y <= 1; y++) {
+          for (int x= -1; x <= 1; x++) {
+            // cellules voisines
+            vec2 neighbor = vec2(float(x),float(y));
+            vec2 point = random2(i_st + neighbor);
+            point = .5 + .5*sin(time/2000. + TWO_PI*point);
+            // Vector between the pixel and the point
+            vec2 diff = neighbor + point - f_st;
+            float dist = length(diff);
+            m_dist = min(m_dist, dist);
+          }
         }
-
-        void main() {
-          vec4 data = texture2D(tex, vUv);
-          vec2 toCenter = vec2(0.5) - vUv;
-          float radius = length(toCenter);
-
-          vec3 color = hsb2rgb(vec3(abs(cos(time / 8000.)), radius, 1.));
-          color *= vec3(data.r * 255.);
-          gl_FragColor = vec4(color, 1.0);
-        }
-      `,
+    
+        vec3 color = vec3(.0);
+        color += m_dist;
+        color += 1.-step(.02, m_dist);
+    
+        color -= step(.1,abs(sin(12.0*m_dist)))*.5;
+    
+        color += vec3(y1/2., 0, abs(cos(time/8000.)));
+    
+        gl_FragColor = vec4(color,1.0);
+      }
+    
+    `,
 
     });
 
-    if (this.data.backSide) this.material.side = THREE.BackSide;
+    this.material.side = THREE.DoubleSide;
 
     this.tick = AFRAME.utils.throttleTick(this.nextGen, 1000/this.data.genPerSec, this);
   },
