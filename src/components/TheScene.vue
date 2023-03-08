@@ -12,6 +12,8 @@ import "../aframe/life-like-automaton2.js";
 import "../aframe/teleport-camera-rig.js";
 import "../aframe/grabbable.js";
 
+/* src="https://rawgit.com/donmccurdy/aframe-postprocessing-component/master/dist/aframe-postprocessing.min.js" */
+
 
 defineProps({
   scale: Number,
@@ -38,15 +40,12 @@ const onMushroomGrabbed = () => {
 
 const loopScale = (el) => {
   AFRAME.ANIME({
-    targets: "#camera-rig #head",
+    targets: "[ref='all']",
     // scale: () => `${AFRAME.ANIME.random(0.99, 1)} ${AFRAME.ANIME.random(1,1)} ${AFRAME.ANIME.random(1, 1)}`,
     // scale: '1.1 1 1',
     // rotation: '0 1 0',
     rotation: () =>
-      `${AFRAME.ANIME.random(0.5, 1)} ${AFRAME.ANIME.random(
-        0,
-        1
-      )} ${AFRAME.ANIME.random(1, 1)}`,
+      `${AFRAME.ANIME.random(0.5, 1)} ${AFRAME.ANIME.random(  0,      1     )} ${AFRAME.ANIME.random(1, 1)}`,
     easing: "easeInOutSine",
     direction: "alternate",
     loop: true,
@@ -79,9 +78,9 @@ const onMushroomEaten = () => {
   mapEntity.setAttribute("animation", {
     property: "position",
     to: "0 0 -1155",
-    dur: 3000,
+    dur: 5000,
     easing: "linear",
-    delay: 1500,
+    delay: 2500,
   });
 
   // Wait for the animation to complete and then move to second position
@@ -92,7 +91,7 @@ const onMushroomEaten = () => {
       dur: 1000,
       easing: "linear",
     });
-  }, 3000);
+  }, 5000);
 
   // Get the 2map entity and move it
   mapEntity2.setAttribute("animation", {
@@ -107,7 +106,7 @@ const onMushroomEaten = () => {
   // const cameraRigEntity = document.querySelector("#camera-rig");
   // cameraRigEntity.setAttribute("scale", "1. 1 1");
   // loopScale(cameraRigEntity);
-  const playerHead = document.querySelector("#camera-rig #head");
+  const playerHead = document.querySelector("[ref='all']");
   loopScale(playerHead);
 
   delay: 1500;
@@ -120,13 +119,16 @@ onMounted(() => {
 });
 
 console.log("animation terminée");
+
+
+
 </script>
 
 
 
 
 <template>
-  <a-scene renderer="colorManagement: true;" sound>
+  <a-scene renderer="colorManagement: true;" sound fog="type: exponential; color: #AAA">
     <!-- fog="type: linear; color: #DFE4E6" -->
     <a-assets @loaded="allAssetsLoaded = true">
       <!--
@@ -146,7 +148,7 @@ console.log("animation terminée");
       <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item>
 
       <a-asset-item id="map1" src="assets/MapForestChampi.glb"></a-asset-item>
-      <a-asset-item id="map2" src="assets/MapAvecAnimaux.glb"></a-asset-item>
+      <a-asset-item id="map2" src="assets/MApAvec.glb"></a-asset-item>
       <a-asset-item id="map3" src="assets/ilo.glb"></a-asset-item>
       <a-asset-item id="cloud1" src="assets/cloud1.glb"></a-asset-item>
       <a-asset-item id="cloud2" src="assets/cloud2.glb"></a-asset-item>
@@ -169,7 +171,8 @@ console.log("animation terminée");
       <a-asset-item        id="son-macarena"        response-type="arraybuffer"        src="assets/Macarena.mp3"        preload="auto"      ></a-asset-item>
       <a-asset-item        id="son-gandalf"        response-type="arraybuffer"        src="assets/Gandalf.mp3"        preload="auto"      ></a-asset-item>
       <a-asset-item        id="son-reveal"        response-type="arraybuffer"        src="assets/Reveal.mp3"        preload="auto"      ></a-asset-item>
-    
+      <a-asset-item        id="son-portal"        response-type="arraybuffer"        src="assets/Portal.mp3"        preload="auto"      ></a-asset-item>
+
       <video id="video" src="/assets/videotexture.mp4" autoplay="true"></video>
     </a-assets>
 
@@ -197,7 +200,10 @@ console.log("animation terminée");
 <!-- <a-sky src="#sky" v-if="allAssetsLoaded"   position="-11 10 -4.8" scale="0.1 0.1 0.1" life-like-automaton > </a-sky> -->
  
 
+<a-entity   v-if="allAssetsLoaded" ref="all"> 
+     
 
+<!--  marche pas <a-entity camera postprocessing="type: vignette; offset: 0.8; darkness: 1.1;"></a-entity> -->
 
     <a-entity
       v-if="allAssetsLoaded"
@@ -231,9 +237,15 @@ console.log("animation terminée");
         position="-1 1.5 0"
       ></a-entity>
       <a-entity
-        sound="src: #son-gandalf; autoplay: true; maxDistance: 10; loop: true; volume: 7; on: loaded"
+        sound="src: #son-gandalf; autoplay: true; maxDistance: 10; loop: true; volume: 2; on: loaded"
         position="25 1.5 -8"
       ></a-entity>
+
+      <a-entity
+        sound="src: #son-portal; autoplay: true; maxDistance: 10; loop: true; volume: 2; on: loaded"
+        position="7 1.5 -19"
+      ></a-entity>
+
       <a-plane position="11 0.2 -4.8" rotation="-90 -90 0" width="40" height="40"  life-like-automaton2></a-plane>
       <a-sphere position="0 1.25 -5" radius="35" life-like-automaton></a-sphere>
     </a-entity>
@@ -277,6 +289,8 @@ console.log("animation terminée");
       material="envMap: #sky; roughness: 10"
     ></a-entity>
 
+
+  </a-entity>
     <!-- animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
  -->
     <TheNavMesh />
